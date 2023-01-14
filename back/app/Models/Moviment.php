@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
 
-class Group extends Model
+class Moviment extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $table = 'groups';
+    protected $table = 'moviments';
     protected $fillable = [
-        'name',
         'user_id',
-        'instituition_id',
-        
+        'group_id',
+        'product_id',
+        'invested_value',
+        'type',
+        'get_value',
+    
     ];
 
     public function user()
@@ -23,14 +26,13 @@ class Group extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function instituition()
+    public function group()
     {
-        return $this->belongsTo(Instituition::class);
+        return $this->belongsTo(Group::class);
     }
 
-    public function moviment()
+    public function product()
     {
-        return $this->hasMany(Moviment::class);
+        return $this->belongsTo(Product::class);
     }
-
 }

@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Group::class);
     }
+
+    public function moviment()
+    {
+        return $this->hasMany(Moviment::class);
+    }
 }

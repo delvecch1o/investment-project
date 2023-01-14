@@ -24,4 +24,10 @@ class Product extends Model
     {
         return $this->belongsTo(Instituition::class);
     }
+
+    public function moviment()
+    {
+        return $this->hasMany(Moviment::class);
+    }
+
 }
