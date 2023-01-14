@@ -7,6 +7,7 @@ use App\Http\Controllers\API\InstituitionController;
 use App\Http\Controllers\API\GroupController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\MovimentController;
+use App\Http\Controllers\API\WalletController;
 
 Route::post('register', [ AuthController::class, 'register']);
 Route::post('login', [ AuthController::class, 'login']);
@@ -27,11 +28,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('group/update/{group}', [GroupController::class, 'update']);
     Route::delete('group/delete/{group}', [GroupController::class, 'destroy']);
 
+
     Route::post('product/instituition/{instituition}', [ProductController::class, 'store']);
     Route::get('product/show', [ProductController::class, 'show']);
     Route::get('product/show/instituition/{instituition}', [ProductController::class, 'showDetails']);
     Route::put('product/update/{product}', [ProductController::class, 'update']);
     Route::delete('product/delete/{product}', [ProductController::class, 'destroy']);
+
+    Route::post('wallet', [WalletController::class, 'store']);
+    Route::get('wallet/show', [WalletController::class, 'show']);
 
     Route::post('moviment/group/{group}/product/{product}', [MovimentController::class, 'store']);
     Route::get('moviment/show', [MovimentController::class, 'show']);
