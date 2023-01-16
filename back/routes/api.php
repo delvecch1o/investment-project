@@ -40,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('moviment/group/{group}/product/{product}', [MovimentController::class, 'store']);
     Route::get('moviment/show', [MovimentController::class, 'show']);
+    Route::put('moviment/{moviment}/withdraw', [MovimentController::class, 'withdrawValue']);
 
 });
 

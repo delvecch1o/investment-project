@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Services\MovimentService;
 use App\Models\Group;
 use App\Models\Product;
+use App\Models\Moviment;
 use App\Http\Requests\MovimentRequest;
+use App\Http\Requests\WithdrawValueRequest;
+
 
 class MovimentController extends Controller
 {
@@ -20,7 +23,7 @@ class MovimentController extends Controller
 
     public function store(MovimentRequest $request, Group $group, Product $product)
     {
-        $movimentData = $this->movimentService->createService(
+        $movimentData = $this->movimentService->createInvestmentService(
           $group, $product,
            ...array_values(
                $request->only([
@@ -31,9 +34,26 @@ class MovimentController extends Controller
         );
         return response()->json([
             'Dados do Investimento' => $movimentData,
-            'message' => 'Investimento criado com sucesso!!!'
+            'message' => 'Investimento realizado com sucesso!!!'
         ]);
     }
+
+    public function withdrawValue(WithdrawValueRequest $request,Moviment $moviment)
+    {
+        $withdrawValueData = $this->movimentService->withdrawValueService(
+            $moviment,
+             ...array_values(
+                 $request->only([
+                     'type',
+                 ])
+             )
+          );
+          return response()->json([
+              'Dados do Saque' => $withdrawValueData,
+              'message' => 'Valor resgatado com sucesso!!!'
+          ]);
+    }
+
 
     public function show()
     {
